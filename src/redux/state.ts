@@ -12,7 +12,7 @@ export type messagesType = {
     message: string
 }
 
-let state = {
+const state = {
     profilePage: {
         posts: [
             {id: 1, message: 'Hi,how are you', likesCount: 12},
@@ -38,6 +38,17 @@ let state = {
             {id: 5, message: 'Yo'},
         ],
     },
+}
+
+
+export const addPost = (postMessage: string)=>{
+    const newPost = {
+        id: 5,
+        message: postMessage,
+        likesCount: 0
+    }
+
+    state.profilePage.posts.push(newPost)
 }
 
 export default state

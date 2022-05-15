@@ -8,19 +8,19 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {dialogsType, messagesType, postType} from './redux/state';
 
 
-type appType ={
+type appType = {
     state: {
-        profilePage:{
+        profilePage: {
             posts: postType[]
 
         },
-        dialogsPage:{
+        dialogsPage: {
             messages: messagesType[]
             dialogs: dialogsType[]
         }
     }
+    addPost: (postMessage: string) => void
 }
-
 
 
 const App = (props: appType) => {
@@ -32,8 +32,11 @@ const App = (props: appType) => {
                 <div className="app-wrapper-content">
                     <Route path="/dialogs"
                            render={() => <Dialogs state={props.state.dialogsPage}/>}/>
+
                     <Route path="/profile"
-                           render={() => <Profile state={props.state.profilePage}/>}/>
+                           render={() => <Profile
+                               state={props.state.profilePage}
+                               addPost={props.addPost}/>}/>
                 </div>
             </div>
         </BrowserRouter>
