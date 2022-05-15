@@ -17,6 +17,7 @@ const MyPosts = (props: myPostProps) => {
     const addPost = () => {
         if (newPostEl.current !== null) {
             props.addPost(newPostEl.current.value)
+            newPostEl.current.value=''
         }
     }
 
