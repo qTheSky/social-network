@@ -17,7 +17,7 @@ export type messagesType = {
 
 export type stateType = {
     profilePage: {
-        posts: postType[],
+        posts: postType[]
         newPostText: string
     }
     dialogsPage: {dialogs: dialogsType[],messages: messagesType[]}
@@ -59,6 +59,7 @@ export const addPost = ()=>{
         message: state.profilePage.newPostText,
         likesCount: 0
     }
+
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText = ''
     rerenderEntireTree(state)
