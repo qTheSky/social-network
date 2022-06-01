@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Profile.module.css';
 import MyPosts from './MyPosts/MyPosts';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
-import {postType} from '../../redux/state';
+import {ActionsType, postType} from '../../redux/state';
 
 
 type profileType = {
@@ -10,7 +10,7 @@ type profileType = {
         posts: postType[]
         newPostText: string
     }
-    dispatch: any
+    dispatch: (action: ActionsType)=> void
 }
 
 const Profile = (props: profileType) => {
