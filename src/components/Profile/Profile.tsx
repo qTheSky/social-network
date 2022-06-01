@@ -10,8 +10,7 @@ type profileType = {
         posts: postType[]
         newPostText: string
     }
-    addPost: ()=>void
-    updateNewPostText: (newText: string) => void
+    dispatch: any
 }
 
 const Profile = (props: profileType) => {
@@ -20,8 +19,7 @@ const Profile = (props: profileType) => {
             <ProfileInfo/>
             <MyPosts posts={props.profilePage.posts}
                      newPostText={props.profilePage.newPostText}
-                     updateNewPostText={props.updateNewPostText}
-                     addPost={props.addPost}
+                     dispatch={props.dispatch}
             />
         </div>
     )
