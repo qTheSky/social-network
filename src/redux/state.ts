@@ -16,7 +16,11 @@ export type stateType = {
 				posts: postType[]
 				newPostText: string
 		}
-		dialogsPage: { dialogs: dialogsType[], messages: messagesType[] }
+		dialogsPage: {
+				dialogs: dialogsType[]
+				messages: messagesType[]
+				newMessageBody: string
+		}
 }
 export type StoreType = {
 		_state: stateType
@@ -25,7 +29,15 @@ export type StoreType = {
 		subscribe: (observer: () => void) => void
 		dispatch: (action: ActionsType) => void
 }
-export type ActionsType = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator>
+export type ActionsType =
+		ReturnType<typeof addPostActionCreator>
+		| ReturnType<typeof updateNewPostTextActionCreator>
+		| ReturnType<typeof sendMessageCreator>
+		| ReturnType<typeof updateNewMessageBodyCreator>
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const SEND_MESSAGE = 'SEND-MESSAGE'
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW_MESSAGE_BODY'
 
 
 export const store: StoreType = {
@@ -37,7 +49,7 @@ export const store: StoreType = {
 								{id: 3, message: 'blabla', likesCount: 11},
 								{id: 4, message: 'dada', likesCount: 11},
 						],
-						newPostText: 'it-kamasutra.com'
+						newPostText: 'newpost'
 				},
 				dialogsPage: {
 						dialogs: [
@@ -55,6 +67,7 @@ export const store: StoreType = {
 								{id: 4, message: 'Yo'},
 								{id: 5, message: 'Yo'},
 						],
+						newMessageBody: 'newmessage'
 				},
 		},
 		_callSubscriber() {
@@ -68,7 +81,7 @@ export const store: StoreType = {
 		},
 
 		dispatch(action) {
-				if (action.type === 'ADD-POST') {
+				if (action.type === ADD_POST) {
 						const newPost = {
 								id: new Date().getTime(),
 								message: this._state.profilePage.newPostText,
@@ -77,12 +90,33 @@ export const store: StoreType = {
 						this._state.profilePage.posts.push(newPost)
 						this._state.profilePage.newPostText = ''
 						this._callSubscriber()
-				} else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+				} else if (action.type === UPDATE_NEW_POST_TEXT) {
 						this._state.profilePage.newPostText = action.newText
+						this._callSubscriber()
+				} else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+						this._state.dialogsPage.newMessageBody = action.body
+						this._callSubscriber()
+				} else if (action.type === SEND_MESSAGE) {
+						const newMessage = {
+								id: new Date().getTime(),
+								message: this._state.dialogsPage.newMessageBody
+						}
+						this._state.dialogsPage.messages.push(newMessage)
+						this._state.dialogsPage.newMessageBody = ''
 						this._callSubscriber()
 				}
 		},
-
 }
-export const addPostActionCreator = () => ({type: 'ADD-POST'} as const)
-export const updateNewPostTextActionCreator = (text: string) => ({type: 'UPDATE-NEW-POST-TEXT', newText: text} as const)
+
+export const addPostActionCreator = () => {
+		return {type: 'ADD-POST'} as const
+}
+export const updateNewPostTextActionCreator = (text: string) => {
+		return {type: 'UPDATE-NEW-POST-TEXT', newText: text} as const
+}
+export const sendMessageCreator = () => {
+		return {type: 'SEND-MESSAGE'} as const
+}
+export const updateNewMessageBodyCreator = (text: string) => {
+		return {type: 'UPDATE-NEW_MESSAGE_BODY', body: text} as const
+}

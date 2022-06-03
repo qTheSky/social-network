@@ -16,11 +16,11 @@ type myPostProps = {
 
 const MyPosts = (props: myPostProps) => {
 
-		let postsElements = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
+		const postsElements = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
-		let postMessageRef = React.createRef<HTMLTextAreaElement>()
+		const postMessageRef = React.createRef<HTMLTextAreaElement>()
 
-		let addPost = () => {
+		const addPost = () => {
 				props.dispatch(addPostActionCreator())
 		}
 		const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
