@@ -6,8 +6,9 @@ export const ProfileInfo = () => {
     return (
         <div>
             <div>
-                <img
-                    src="https://cdn.pixabay.com/photo/2018/05/01/07/52/tuscany-3364921__480.jpg"/>
+                <img src="https://klike.net/uploads/posts/2019-06/1561528146_5.jpg"
+                     style={{width:'700px'}}
+                />
             </div>
             <div className={s.descriptionBlock}>
                 ava + description
