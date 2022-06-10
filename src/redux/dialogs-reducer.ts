@@ -1,7 +1,20 @@
-import {ActionsType, dialogsPageType} from './store';
+import {ActionsType} from './redux-store';
 
+export type dialogsPageType = {
+		dialogs: dialogsType[]
+		messages: messagesType[]
+		newMessageBody: string
+}
+export type dialogsType = {
+		id: number
+		name: string
+}
+export type messagesType = {
+		id: number
+		message: string
+}
 
-const initialState = {
+const initialState: dialogsPageType = {
 		dialogs: [
 				{id: 1, name: 'Dimych'},
 				{id: 2, name: 'Andrew'},

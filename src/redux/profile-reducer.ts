@@ -1,6 +1,18 @@
-import {ActionsType, profilePageType} from './store';
+import {ActionsType} from './redux-store';
 
-const initialState = {
+
+export type profilePageType = {
+		posts: postType[]
+		newPostText: string
+}
+export type postType = {
+		id: number
+		message: string
+		likesCount: number
+}
+
+
+const initialState: profilePageType = {
 		posts: [
 				{id: 1, message: 'Hi,how are you', likesCount: 12},
 				{id: 2, message: 'It\'s my first post', likesCount: 11},
