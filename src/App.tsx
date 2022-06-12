@@ -5,12 +5,9 @@ import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import {Route} from 'react-router-dom';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
-import {StoreReduxType} from './redux/redux-store';
 
 
-type appType = {
-		store: StoreReduxType
-}
+type appType = {}
 
 
 const App = (props: appType) => {
@@ -20,10 +17,10 @@ const App = (props: appType) => {
 						<Navbar/>
 						<div className="app-wrapper-content">
 								<Route path="/dialogs"
-								       render={() => <DialogsContainer store={props.store}/>}/>
+								       render={() => <DialogsContainer/>}/>
 
 								<Route path="/profile"
-								       render={() => <Profile store={props.store}/>}/>
+								       render={() => <Profile/>}/>
 						</div>
 				</div>
 		);
