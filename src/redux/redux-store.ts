@@ -1,6 +1,6 @@
 import {combineReducers, createStore} from 'redux';
-import profileReducer, {addPostActionCreator, profilePageType, updateNewPostTextActionCreator} from './profile-reducer';
-import dialogsReducer, {dialogsPageType, sendMessageCreator, updateNewMessageBodyCreator} from './dialogs-reducer';
+import profileReducer, {addPostActionCreator, ProfilePageType, updateNewPostTextActionCreator} from './profile-reducer';
+import dialogsReducer, {DialogsPageType, sendMessageCreator, updateNewMessageBodyCreator} from './dialogs-reducer';
 import sidebarReducer from './sidebar-reducer';
 
 export type ActionsType =
@@ -10,8 +10,8 @@ export type ActionsType =
 		| ReturnType<typeof updateNewMessageBodyCreator>
 
 export type StateType = {
-		profilePage: profilePageType
-		dialogsPage: dialogsPageType
+		profilePage: ProfilePageType
+		dialogsPage: DialogsPageType
 		sidebar: Object
 }
 export type StoreReduxType = {
@@ -20,10 +20,12 @@ export type StoreReduxType = {
 		dispatch: (action: ActionsType) => void
 }
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
 		profilePage: profileReducer,
 		dialogsPage: dialogsReducer,
 		sidebar: sidebarReducer,
 })
 
-export const store = createStore(reducers)
+export type AppStateType = ReturnType<typeof rootReducer>
+
+export const store = createStore(rootReducer)
