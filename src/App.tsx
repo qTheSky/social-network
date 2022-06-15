@@ -4,7 +4,7 @@ import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import {Route} from 'react-router-dom';
-import {DialogsContainer} from './components/Dialogs/DialogsContainer';
+import {SuperDialogsContainer} from './components/Dialogs/DialogsContainer';
 
 
 type appType = {}
@@ -17,7 +17,7 @@ const App = (props: appType) => {
 						<Navbar/>
 						<div className="app-wrapper-content">
 								<Route path="/dialogs"
-								       render={() => <DialogsContainer/>}/>
+								       render={() => <SuperDialogsContainer/>}/>
 
 								<Route path="/profile"
 								       render={() => <Profile/>}/>
