@@ -1,11 +1,11 @@
 import {ActionsType} from './redux-store';
 
 export type DialogsPageType = {
-		dialogs: dialogsType[]
+		dialogs: DialogsType[]
 		messages: messagesType[]
 		newMessageBody: string
 }
-export type dialogsType = {
+export type DialogsType = {
 		id: number
 		name: string
 }
@@ -37,16 +37,13 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTy
 
 		switch (action.type) {
 				case 'UPDATE-NEW_MESSAGE_BODY':
-						state.newMessageBody = action.body
-						return state
+						return {...state, newMessageBody: action.body}
 				case 'SEND-MESSAGE':
 						const newMessage = {
 								id: new Date().getTime(),
 								message: state.newMessageBody
 						}
-						state.messages.push(newMessage)
-						state.newMessageBody = ''
-						return state
+						return {...state, messages: [...state.messages, newMessage], newMessageBody: ''}
 				default:
 						return state
 		}

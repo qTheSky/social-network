@@ -22,7 +22,6 @@ const mapStateToProps = (state: AppStateType): mapStateToProps => {
 		}
 }
 
-
 const mapDispatchToProps = (dispatch: any): mapDispatchToProps => {
 		return {
 				addPost: () => {
