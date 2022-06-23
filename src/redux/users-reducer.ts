@@ -3,14 +3,14 @@ import {ActionsType} from './redux-store';
 
 export type UserType = {
 		id: number
-		photoUrl: string
-		followed: boolean
-		fullname: string
-		status: string
-		location: {
-				city: string
-				country: string
+		photos: {
+				large: string
+				small: string
 		}
+		followed: boolean
+		name: string
+		status: string
+		uniqueUrlName: string
 }
 
 export type UsersPageType = {
@@ -21,7 +21,7 @@ const initialState: UsersPageType = {
 		users: []
 }
 
-const usersReducer = (state: UsersPageType = initialState, action: ActionsType):UsersPageType => {
+const usersReducer = (state: UsersPageType = initialState, action: ActionsType): UsersPageType => {
 
 		switch (action.type) {
 				case 'FOLLOW':

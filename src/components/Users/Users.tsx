@@ -1,39 +1,18 @@
 import React from 'react';
-import {UsersPageType, UserType} from '../../redux/users-reducer';
 import s from './Users.module.css'
 import {UsersPropsType} from './UsersContainer';
-
+import axios from 'axios';
+import userPhoto from '../../../src/assets/images/user.jpg'
 
 export const Users = (props: UsersPropsType) => {
 
 		if (props.usersPage.users.length === 0) {
-				props.setUsers([
-								{
-										id: 1,
-										photoUrl: 'https://тайна-вашего-имени.рф/img/imena/dmitriy.jpg',
-										followed: false,
-										fullname: 'Dmitry',
-										status: 'i am a boss',
-										location: {city: 'Minsk', country: 'Belarus'}
-								},
-								{
-										id: 2,
-										photoUrl: 'https://тайна-вашего-имени.рф/img/imena/dmitriy.jpg',
-										followed: true,
-										fullname: 'Sasha',
-										status: 'i am a boss too',
-										location: {city: 'Moscow', country: 'Russia'}
-								},
-								{
-										id: 3,
-										photoUrl: 'https://тайна-вашего-имени.рф/img/imena/dmitriy.jpg',
-										followed: false,
-										fullname: 'Andrew',
-										status: 'i am a boss 2',
-										location: {city: 'Minsk', country: 'Belarus'}
-								},
-						]
-				)
+
+				axios.get('https://social-network.samuraijs.com/api/1.0/users')
+						.then(response => {
+								props.setUsers(response.data.items)
+						})
+
 		}
 		return (
 				<div>
@@ -42,7 +21,8 @@ export const Users = (props: UsersPropsType) => {
 										<div key={u.id}>
 												<span>
 														<div>
-																<img className={s.userPhoto} src={u.photoUrl} alt=""/>
+																<img className={s.userPhoto} src={u.photos.small !== null ? u.photos.small : userPhoto}
+																     alt=""/>
 														</div>
 														<div>
 																{
@@ -62,12 +42,12 @@ export const Users = (props: UsersPropsType) => {
 												</span>
 												<span>
 														<span>
-																<div>{u.fullname}</div>
+																<div>{u.name}</div>
 																<div>{u.status}</div>
 														</span>
 														<span>
-																<div>{u.location.country}</div>
-																<div>{u.location.city}</div>
+																<div>{'u.location.country'}</div>
+																<div>{'u.location.city'}</div>
 														</span>
 												</span>
 										</div>)
