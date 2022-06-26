@@ -4,36 +4,40 @@ import {UsersPropsType} from './UsersContainer';
 import axios from 'axios';
 import userPhoto from '../../../src/assets/images/user.jpg'
 
-export const Users = (props: UsersPropsType) => {
+export class Users extends React.Component<UsersPropsType> {
 
-		if (props.usersPage.users.length === 0) {
-
+		constructor(props: UsersPropsType) {
+				super(props)
+				console.log('new')
 				axios.get('https://social-network.samuraijs.com/api/1.0/users')
 						.then(response => {
-								props.setUsers(response.data.items)
+								this.props.setUsers(response.data.items)
 						})
-
 		}
-		return (
-				<div>
+
+		render() {
+				return <div>
 						{
-								props.usersPage.users.map(u =>
+								this.props.usersPage.users.map((u) =>
 										<div key={u.id}>
 												<span>
 														<div>
-																<img className={s.userPhoto} src={u.photos.small !== null ? u.photos.small : userPhoto}
+																<img className={s.userPhoto}
+																     src={u.photos.small !== null
+																		     ? u.photos.small
+																		     : userPhoto}
 																     alt=""/>
 														</div>
 														<div>
 																{
 																		u.followed
 																				? <button onClick={() => {
-																						props.unfollow(u.id)
+																						this.props.unfollow(u.id)
 																				}}>
 																						unfollow
 																				</button>
 																				: <button onClick={() => {
-																						props.follow(u.id)
+																						this.props.follow(u.id)
 																				}}>
 																						follow
 																				</button>
@@ -53,5 +57,5 @@ export const Users = (props: UsersPropsType) => {
 										</div>)
 						}
 				</div>
-		);
-};
+		}
+}
