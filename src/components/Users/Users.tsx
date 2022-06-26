@@ -5,10 +5,7 @@ import axios from 'axios';
 import userPhoto from '../../../src/assets/images/user.jpg'
 
 export class Users extends React.Component<UsersPropsType> {
-
-		constructor(props: UsersPropsType) {
-				super(props)
-				console.log('new')
+		componentDidMount() {
 				axios.get('https://social-network.samuraijs.com/api/1.0/users')
 						.then(response => {
 								this.props.setUsers(response.data.items)
