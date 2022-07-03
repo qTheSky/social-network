@@ -22,9 +22,9 @@ export type UsersPageType = {
 
 const initialState: UsersPageType = {
 		users: [],
-		pageSize: 5,
+		pageSize: 10,
 		totalUsersCount: 0,
-		currentPage: 2,
+		currentPage: 1,
 }
 
 const usersReducer = (state: UsersPageType = initialState, action: ActionsType): UsersPageType => {

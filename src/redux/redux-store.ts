@@ -13,7 +13,7 @@ export type ActionsType =
 		| ReturnType<typeof unfollowAC>
 		| ReturnType<typeof setUsersAC>
 		| ReturnType<typeof setCurrentPageAC>
-| ReturnType<typeof setUsersTotalCountAC>
+		| ReturnType<typeof setUsersTotalCountAC>
 
 const rootReducer = combineReducers({
 		profilePage: profileReducer,
