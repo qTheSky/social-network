@@ -3,6 +3,7 @@ import {addPostActionCreator, PostType, updateNewPostTextActionCreator} from '..
 import MyPosts from './MyPosts';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../../redux/redux-store';
+import {Dispatch} from 'redux';
 
 
 type mapStateToProps = {
@@ -22,7 +23,7 @@ const mapStateToProps = (state: AppStateType): mapStateToProps => {
 		}
 }
 
-const mapDispatchToProps = (dispatch: any): mapDispatchToProps => {
+const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToProps => {
 		return {
 				addPost: () => {
 						dispatch(addPostActionCreator())

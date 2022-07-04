@@ -1,5 +1,5 @@
 import {combineReducers, createStore} from 'redux';
-import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from './profile-reducer';
+import profileReducer, {addPostActionCreator, setUserProfile, updateNewPostTextActionCreator} from './profile-reducer';
 import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from './dialogs-reducer';
 import sidebarReducer from './sidebar-reducer';
 import usersReducer, {
@@ -22,6 +22,7 @@ export type ActionsType =
 		| ReturnType<typeof setCurrentPage>
 		| ReturnType<typeof setTotalUsersCount>
 		| ReturnType<typeof toggleIsFetching>
+		| ReturnType<typeof setUserProfile>
 
 const rootReducer = combineReducers({
 		profilePage: profileReducer,
@@ -33,3 +34,6 @@ const rootReducer = combineReducers({
 export type AppStateType = ReturnType<typeof rootReducer>
 
 export const store = createStore(rootReducer)
+
+// @ts-ignore
+window.store = store

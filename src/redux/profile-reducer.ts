@@ -1,9 +1,32 @@
 import {ActionsType} from './redux-store';
 
 
+export type ProfileType = {
+		aboutMe?: string
+		contacts: {
+				facebook?: string
+				github?: string
+				instagram?: string
+				mainLink?: any
+				twitter?: string
+				vk?: string
+				website?: string
+				youtube?: string
+		}
+		fullName?: string
+		lookingForAJob?: boolean
+		lookingForAjobDescription?: string
+		photos: {
+				large?: string
+				small?: string
+		}
+		userId: number
+} | null
+
 export type ProfilePageType = {
 		posts: PostType[]
 		newPostText: string
+		profile: ProfileType
 }
 export type PostType = {
 		id: number
@@ -19,7 +42,8 @@ const initialState: ProfilePageType = {
 				{id: 3, message: 'blabla', likesCount: 11},
 				{id: 4, message: 'dada', likesCount: 11},
 		],
-		newPostText: 'newpost'
+		newPostText: 'newpost',
+		profile: null,
 }
 
 const profileReducer = (state: ProfilePageType = initialState, action: ActionsType) => {
@@ -34,6 +58,8 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
 						return {...state, posts: [newPost, ...state.posts], newPostText: ''}
 				case 'UPDATE-NEW-POST-TEXT':
 						return {...state, newPostText: action.newText}
+				case 'SET-USER-PROFILE':
+						return {...state, profile: action.profile}
 				default:
 						return state
 		}
@@ -44,5 +70,8 @@ export const addPostActionCreator = () => {
 }
 export const updateNewPostTextActionCreator = (text: string) => {
 		return {type: 'UPDATE-NEW-POST-TEXT', newText: text} as const
+}
+export const setUserProfile = (profile: ProfileType) => {
+		return {type: 'SET-USER-PROFILE', profile} as const
 }
 export default profileReducer
