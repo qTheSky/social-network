@@ -10,8 +10,8 @@ type UsersPropsType = {
 		currentPage: number
 		onPageChanged: (pageNumber: number) => void
 		users: UserType[]
-		follow:(id: number)=> void
-		unfollow:(id: number)=> void
+		follow: (id: number) => void
+		unfollow: (id: number) => void
 }
 
 export const Users = (props: UsersPropsType) => {
@@ -25,9 +25,12 @@ export const Users = (props: UsersPropsType) => {
 		return (
 				<div>
 						<div>
-								{pages.map(p => {
-										return <span className={props.currentPage === p ? s.selectedPage : ''}
-										             onClick={() => props.onPageChanged(p)}>
+								{pages.map((p, i) => {
+										return <span
+												className={props.currentPage === p ? s.selectedPage : ''}
+												onClick={() => props.onPageChanged(p)}
+												key={i}
+										>
 												{p}
 										</span>
 								})}
