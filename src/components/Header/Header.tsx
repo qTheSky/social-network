@@ -2,7 +2,12 @@ import React from 'react';
 import s from './Header.module.css'
 import {NavLink} from 'react-router-dom';
 
-const Header = (props: any) => {
+type HeaderPropsType = {
+		isAuth: boolean
+		login: string | null
+}
+
+const Header = (props: HeaderPropsType) => {
 		return <header className={s.header}>
 				<img
 						src="https://upload.wikimedia.org/wikipedia/commons/2/21/VK.com-logo.svg"/>

@@ -1,14 +1,22 @@
 import {ActionsType} from './redux-store';
 
 
-const initialState: any = {
+type AuthType = {
+		userId: number|null
+		email: string|null
+		login: string|null
+		isAuth:boolean
+
+}
+
+const initialState: AuthType = {
 		userId: null,
 		email: null,
 		login: null,
 		isAuth: false
 }
 
-const authReducer = (state: any = initialState, action: ActionsType): any => {
+const authReducer = (state: AuthType = initialState, action: ActionsType): AuthType => {
 
 		switch (action.type) {
 				case 'SET-USER-DATA':
