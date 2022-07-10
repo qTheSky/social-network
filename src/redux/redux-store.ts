@@ -8,7 +8,7 @@ import usersReducer, {
 		setUsers,
 		setTotalUsersCount,
 		toggleIsFetching,
-		unfollow
+		unfollow, toggleFollowingProgress
 } from './users-reducer';
 import authReducer, {setAuthUserData} from './auth-reducer';
 
@@ -25,6 +25,7 @@ export type ActionsType =
 		| ReturnType<typeof toggleIsFetching>
 		| ReturnType<typeof setUserProfile>
 		| ReturnType<typeof setAuthUserData>
+		| ReturnType<typeof toggleFollowingProgress>
 
 const rootReducer = combineReducers({
 		profilePage: profileReducer,
