@@ -1,24 +1,24 @@
-import {combineReducers, createStore} from 'redux';
+import {applyMiddleware, combineReducers, createStore} from 'redux';
 import profileReducer, {addPostActionCreator, setUserProfile, updateNewPostTextActionCreator} from './profile-reducer';
 import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from './dialogs-reducer';
 import sidebarReducer from './sidebar-reducer';
 import usersReducer, {
-		follow,
 		setCurrentPage,
 		setUsers,
 		setTotalUsersCount,
 		toggleIsFetching,
-		unfollow, toggleFollowingProgress
+		followSuccess, toggleFollowingProgress, unfollowSuccess
 } from './users-reducer';
 import authReducer, {setAuthUserData} from './auth-reducer';
+import thunkMiddleWare from 'redux-thunk'
 
 export type ActionsType =
 		ReturnType<typeof addPostActionCreator>
 		| ReturnType<typeof updateNewPostTextActionCreator>
 		| ReturnType<typeof sendMessageCreator>
 		| ReturnType<typeof updateNewMessageBodyCreator>
-		| ReturnType<typeof follow>
-		| ReturnType<typeof unfollow>
+		| ReturnType<typeof followSuccess>
+		| ReturnType<typeof unfollowSuccess>
 		| ReturnType<typeof setUsers>
 		| ReturnType<typeof setCurrentPage>
 		| ReturnType<typeof setTotalUsersCount>
@@ -37,7 +37,7 @@ const rootReducer = combineReducers({
 
 export type AppStateType = ReturnType<typeof rootReducer>
 
-export const store = createStore(rootReducer)
+export const store = createStore(rootReducer, applyMiddleware(thunkMiddleWare))
 
 // @ts-ignore
 window.store = store
