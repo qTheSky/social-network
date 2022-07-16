@@ -113,4 +113,6 @@ export const unfollow = (userId:number)=>{
 								dispatch(toggleFollowingProgress(false, userId))
 						})
 }}
+
+
 export default usersReducer

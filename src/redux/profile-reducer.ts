@@ -1,4 +1,6 @@
 import {ActionsType} from './redux-store';
+import {Dispatch} from 'redux';
+import {usersAPI} from '../api/api';
 
 
 export type ProfileType = {
@@ -73,5 +75,12 @@ export const updateNewPostTextActionCreator = (text: string) => {
 }
 export const setUserProfile = (profile: ProfileType) => {
 		return {type: 'SET-USER-PROFILE', profile} as const
+}
+
+
+export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
+		usersAPI.getProfile(userId).then(res => {
+				dispatch(setUserProfile(res.data))
+		})
 }
 export default profileReducer

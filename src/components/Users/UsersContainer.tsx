@@ -3,9 +3,9 @@ import {connect} from 'react-redux';
 import {AppStateType} from '../../redux/redux-store';
 import {
 		follow,
-		followSuccess, getUsers,
+		getUsers,
 		setCurrentPage,
-		toggleFollowingProgress, unfollow, unfollowSuccess,
+		toggleFollowingProgress, unfollow,
 		UserType
 } from '../../redux/users-reducer';
 import {Users} from './Users';
@@ -37,6 +37,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType> {
 		}
 
 		onPageChanged = (pageNumber: number) => {
+				this.props.setCurrentPage(pageNumber)
 				this.props.getUsers(pageNumber, this.props.pageSize)
 		}
 
