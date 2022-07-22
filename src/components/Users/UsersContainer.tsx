@@ -27,7 +27,7 @@ type mapDispatchToPropsType = {
 		unfollow: (userId: number) => void
 		setCurrentPage: (pageNumber: number) => void
 		toggleFollowingProgress: (isFetchig: boolean, userId: number) => void
-		getUsers: any
+		getUsers: (currentPage: number, pageSize: number) => void
 }
 
 export type UsersContainerPropsType = mapStatePropsType & mapDispatchToPropsType

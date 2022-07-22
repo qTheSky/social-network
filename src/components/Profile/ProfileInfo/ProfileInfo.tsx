@@ -6,11 +6,16 @@ import {ProfileStatus} from './ProfileStatus'
 
 type ProfileInfoPropsType = {
 		profile: ProfileType
+		status: string
+		updateStatus: (status: string) => void
 }
 
 export const ProfileInfo = (props: ProfileInfoPropsType) => {
 		if (!props.profile) {
 				return <Preloader/>
+		}
+		const updateStatus = (status: string) => {
+				props.updateStatus(status)
 		}
 		return (
 				<div>
@@ -27,7 +32,7 @@ export const ProfileInfo = (props: ProfileInfoPropsType) => {
 										alt="ava"
 										width={'175px'}
 								/>
-								<ProfileStatus status={'Hello my friends'}/>
+								<ProfileStatus status={props.status} updateStatus={updateStatus}/>
 								<div>{props.profile.aboutMe ? props.profile.aboutMe : 'пользователь не оставил информации о себе'}</div>
 						</div>
 				</div>
