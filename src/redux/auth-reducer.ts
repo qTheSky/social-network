@@ -47,4 +47,5 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
 				})
 }
 
+
 export default authReducer
