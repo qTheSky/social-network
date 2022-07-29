@@ -3,6 +3,19 @@ import {Dispatch} from 'redux';
 import {profileAPI, usersAPI} from '../api/api';
 
 
+type AddPostType = {
+		type: 'ADD-POST'
+		newPost: string
+}
+type SetUserProfileType = {
+		type: 'SET-USER-PROFILE'
+		profile: ProfileType
+}
+type SetStatusType = {
+		type: 'SET-STATUS'
+		status: string
+}
+
 export type ProfileType = {
 		aboutMe?: string
 		contacts: {
@@ -27,7 +40,6 @@ export type ProfileType = {
 
 export type ProfilePageType = {
 		posts: PostType[]
-		newPostText: string
 		profile: ProfileType
 		status: string
 }
@@ -45,23 +57,20 @@ const initialState: ProfilePageType = {
 				{id: 3, message: 'blabla', likesCount: 11},
 				{id: 4, message: 'dada', likesCount: 11},
 		],
-		newPostText: 'newpost',
 		profile: null,
 		status: '',
 }
 
-const profileReducer = (state: ProfilePageType = initialState, action: ActionsType) => {
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionsType) => {
 
 		switch (action.type) {
 				case 'ADD-POST':
 						const newPost = {
 								id: new Date().getTime(),
-								message: state.newPostText,
+								message: action.newPost,
 								likesCount: 0
 						}
 						return {...state, posts: [newPost, ...state.posts], newPostText: ''}
-				case 'UPDATE-NEW-POST-TEXT':
-						return {...state, newPostText: action.newText}
 				case 'SET-USER-PROFILE':
 						return {...state, profile: action.profile}
 				case 'SET-STATUS':
@@ -71,16 +80,13 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
 		}
 
 }
-export const addPostActionCreator = () => {
-		return {type: 'ADD-POST'} as const
+export const addPostActionCreator = (newPost: string): AddPostType => {
+		return {type: 'ADD-POST', newPost} as const
 }
-export const updateNewPostTextActionCreator = (text: string) => {
-		return {type: 'UPDATE-NEW-POST-TEXT', newText: text} as const
-}
-export const setUserProfile = (profile: ProfileType) => {
+export const setUserProfile = (profile: ProfileType): SetUserProfileType => {
 		return {type: 'SET-USER-PROFILE', profile} as const
 }
-export const setStatus = (status: string) => {
+export const setStatus = (status: string): SetStatusType => {
 		return {type: 'SET-STATUS', status} as const
 }
 
@@ -102,4 +108,3 @@ export const updateStatus = (status: string) => (dispatch: Dispatch) => {
 						}
 				})
 }
-export default profileReducer

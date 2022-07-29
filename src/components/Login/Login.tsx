@@ -9,7 +9,6 @@ type FormDataType = {
 
 export const Login = () => {
 		const onSubmit = (formdata: FormDataType) => {
-				console.log(formdata)
 		}
 		return (
 				<div>

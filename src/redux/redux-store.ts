@@ -1,18 +1,15 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
-import profileReducer, {
-		addPostActionCreator,
-		setStatus,
-		setUserProfile,
-		updateNewPostTextActionCreator
-} from './profile-reducer';
-import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from './dialogs-reducer';
+import {profileReducer, addPostActionCreator, setStatus, setUserProfile,} from './profile-reducer';
+import {dialogsReducer, sendMessage} from './dialogs-reducer';
 import sidebarReducer from './sidebar-reducer';
 import usersReducer, {
+		followSuccess,
 		setCurrentPage,
-		setUsers,
 		setTotalUsersCount,
+		setUsers,
+		toggleFollowingProgress,
 		toggleIsFetching,
-		followSuccess, toggleFollowingProgress, unfollowSuccess
+		unfollowSuccess
 } from './users-reducer';
 import authReducer, {setAuthUserData} from './auth-reducer';
 import thunkMiddleWare from 'redux-thunk'
@@ -20,9 +17,7 @@ import {reducer as formReducer} from 'redux-form';
 
 export type ActionsType =
 		ReturnType<typeof addPostActionCreator>
-		| ReturnType<typeof updateNewPostTextActionCreator>
-		| ReturnType<typeof sendMessageCreator>
-		| ReturnType<typeof updateNewMessageBodyCreator>
+		| ReturnType<typeof sendMessage>
 		| ReturnType<typeof followSuccess>
 		| ReturnType<typeof unfollowSuccess>
 		| ReturnType<typeof setUsers>
