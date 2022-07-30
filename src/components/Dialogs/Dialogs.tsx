@@ -3,7 +3,7 @@ import s from './Dialogs.module.css';
 import {DialogItem} from './DialogItem/DialogsItem';
 import {Message} from './Message/Message';
 import {DialogsPropsType} from './DialogsContainer';
-import {Field, reduxForm} from 'redux-form';
+import {AddMessageFormRedux} from './AddMessageForm';
 
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -24,30 +24,9 @@ export const Dialogs = (props: DialogsPropsType) => {
 						</div>
 						<div className={s.messages}>
 								<div>{messagesElements}</div>
-								<div>
-										<AddMessageFormRedux onSubmit={addNewMessage}/>
-								</div>
+								<AddMessageFormRedux onSubmit={addNewMessage}/>
 						</div>
 				</div>
 		)
 }
 
-const AddMessageForm = (props: any) => {
-		return (
-				<form onSubmit={props.handleSubmit}>
-						<div>
-								<Field component={'textarea'}
-								       name={'newMessageBody'}
-								       placeholder={'Enter your message'}
-								/>
-						</div>
-						<div>
-								<button>
-										Send
-								</button>
-						</div>
-				</form>
-		)
-}
-
-const AddMessageFormRedux = reduxForm({form: 'dialogAddMessageForm'})(AddMessageForm)
