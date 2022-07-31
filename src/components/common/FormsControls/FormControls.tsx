@@ -6,10 +6,10 @@ const FormControl = (props: any) => {
 		const hasError = props.meta.touched && props.meta.error
 		return (
 				<div className={`${s.formControl} ${hasError && s.error}`}>
-						{props.children}
 						<div>
-								{hasError && <span>{props.meta.error}</span>}
+								{props.children}
 						</div>
+						{hasError && <span>{props.meta.error}</span>}
 				</div>
 		)
 }
