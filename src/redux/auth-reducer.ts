@@ -1,7 +1,11 @@
-import {ActionsType} from './redux-store';
-import {Dispatch} from 'redux';
+import {ActionsType, AppThunk} from './redux-store';
 import {authAPI} from '../api/api';
+import {Dispatch} from 'redux';
 
+type SetAuthUserDataType = {
+		type: 'SET-USER-DATA'
+		payload: AuthType
+}
 
 type AuthType = {
 		userId: number | null
@@ -24,8 +28,7 @@ const authReducer = (state: AuthType = initialState, action: ActionsType): AuthT
 				case 'SET-USER-DATA':
 						return {
 								...state,
-								...action.data,
-								isAuth: true,
+								...action.payload,
 						}
 				default:
 						return state
@@ -33,8 +36,8 @@ const authReducer = (state: AuthType = initialState, action: ActionsType): AuthT
 
 }
 
-export const setAuthUserData = (userId: any, email: any, login: any) => {
-		return {type: 'SET-USER-DATA', data: {userId, email, login}} as const
+export const setAuthUserData = (userId: any, email: any, login: any, isAuth: boolean): SetAuthUserDataType => {
+		return {type: 'SET-USER-DATA', payload: {userId, email, login, isAuth}} as const
 }
 
 export const getAuthUserData = () => (dispatch: Dispatch) => {
@@ -42,7 +45,27 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
 				.then(response => {
 						if (response.data.resultCode === 0) {
 								const {id, login, email} = response.data.data
-								dispatch(setAuthUserData(id, email, login))
+								dispatch(setAuthUserData(id, email, login, true))
+						}
+				})
+}
+
+
+export const login = (email: string, password: string, rememberMe: boolean): AppThunk => (dispatch) => {
+		authAPI.login(email, password, rememberMe)
+				.then(response => {
+						if (response.data.resultCode === 0) {
+								dispatch(getAuthUserData())
+						}
+				})
+}
+
+
+export const logout = () => (dispatch: Dispatch) => {
+		authAPI.logout()
+				.then(response => {
+						if (response.data.resultCode === 0) {
+								dispatch(setAuthUserData(null, null, null, false))
 						}
 				})
 }
