@@ -1,6 +1,6 @@
 import {profileReducer, addPostActionCreator} from './profile-reducer';
 import {sendMessage, dialogsReducer} from './dialogs-reducer';
-import sidebarReducer from './sidebar-reducer';
+import {sidebarReducer} from './sidebar-reducer';
 //
 // export type profilePageType = {
 // 		posts: postType[]

@@ -1,20 +1,8 @@
-import {ActionsType, AppThunk} from './redux-store';
+import {AppThunk} from './redux-store';
 import {authAPI} from '../api/api';
 import {Dispatch} from 'redux';
 import {stopSubmit} from 'redux-form';
 
-type SetAuthUserDataType = {
-		type: 'SET-USER-DATA'
-		payload: AuthType
-}
-
-type AuthType = {
-		userId: number | null
-		email: string | null
-		login: string | null
-		isAuth: boolean
-
-}
 
 const initialState: AuthType = {
 		userId: null,
@@ -23,24 +11,21 @@ const initialState: AuthType = {
 		isAuth: false
 }
 
-const authReducer = (state: AuthType = initialState, action: ActionsType): AuthType => {
-
+export const authReducer = (state: AuthType = initialState, action: ActionsType): AuthType => {
 		switch (action.type) {
 				case 'SET-USER-DATA':
-						return {
-								...state,
-								...action.payload,
-						}
+						return {...state, ...action.payload,}
 				default:
 						return state
 		}
 
 }
+//actions
+export const setAuthUserData = (userId: any, email: any, login: any, isAuth: boolean) =>
+		({type: 'SET-USER-DATA', payload: {userId, email, login, isAuth}} as const)
 
-export const setAuthUserData = (userId: any, email: any, login: any, isAuth: boolean): SetAuthUserDataType => {
-		return {type: 'SET-USER-DATA', payload: {userId, email, login, isAuth}} as const
-}
 
+//thunks
 export const getAuthUserData = () => (dispatch: Dispatch) => {
 		authAPI.me()
 				.then(response => {
@@ -50,8 +35,6 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
 						}
 				})
 }
-
-
 export const login = (email: string, password: string, rememberMe: boolean): AppThunk => (dispatch) => {
 		authAPI.login(email, password, rememberMe)
 				.then(response => {
@@ -65,8 +48,6 @@ export const login = (email: string, password: string, rememberMe: boolean): App
 						}
 				})
 }
-
-
 export const logout = () => (dispatch: Dispatch) => {
 		authAPI.logout()
 				.then(response => {
@@ -76,4 +57,14 @@ export const logout = () => (dispatch: Dispatch) => {
 				})
 }
 
-export default authReducer
+
+//types
+type ActionsType =
+		| ReturnType<typeof setAuthUserData>
+
+type AuthType = {
+		userId: number | null
+		email: string | null
+		login: string | null
+		isAuth: boolean
+}

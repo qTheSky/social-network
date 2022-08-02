@@ -1,23 +1,3 @@
-import {ActionsType} from './redux-store';
-
-type SendMessageType = {
-		type: 'SEND-MESSAGE'
-		newMessageBody: string
-}
-
-export type DialogsPageType = {
-		dialogs: DialogsType[]
-		messages: messagesType[]
-}
-export type DialogsType = {
-		id: number
-		name: string
-}
-export type messagesType = {
-		id: number
-		message: string
-}
-
 const initialState: DialogsPageType = {
 		dialogs: [
 				{id: 1, name: 'Dimych'},
@@ -37,7 +17,6 @@ const initialState: DialogsPageType = {
 }
 
 export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsType): DialogsPageType => {
-
 		switch (action.type) {
 				case 'SEND-MESSAGE':
 						const newMessage = {
@@ -49,6 +28,25 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Ac
 						return state
 		}
 }
-export const sendMessage = (newMessageBody: string): SendMessageType => {
-		return {type: 'SEND-MESSAGE', newMessageBody} as const
+//actions
+export const sendMessage = (newMessageBody: string) =>
+		({type: 'SEND-MESSAGE', newMessageBody} as const)
+
+
+//thunks
+
+//types
+type ActionsType =
+		| ReturnType<typeof sendMessage>
+export type DialogsPageType = {
+		dialogs: DialogsType[]
+		messages: messagesType[]
+}
+export type DialogsType = {
+		id: number
+		name: string
+}
+export type messagesType = {
+		id: number
+		message: string
 }

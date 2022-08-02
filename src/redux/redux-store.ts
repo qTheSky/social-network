@@ -1,33 +1,12 @@
 import {AnyAction, applyMiddleware, combineReducers, createStore} from 'redux';
-import {profileReducer, addPostActionCreator, setStatus, setUserProfile,} from './profile-reducer';
-import {dialogsReducer, sendMessage} from './dialogs-reducer';
-import sidebarReducer from './sidebar-reducer';
-import usersReducer, {
-		followSuccess,
-		setCurrentPage,
-		setTotalUsersCount,
-		setUsers,
-		toggleFollowingProgress,
-		toggleIsFetching,
-		unfollowSuccess
-} from './users-reducer';
-import authReducer, {setAuthUserData} from './auth-reducer';
+import {profileReducer,} from './profile-reducer';
+import {dialogsReducer} from './dialogs-reducer';
+import {sidebarReducer} from './sidebar-reducer';
+import {usersReducer} from './users-reducer';
+import {authReducer} from './auth-reducer';
 import thunkMiddleWare, {ThunkAction} from 'redux-thunk'
 import {reducer as formReducer} from 'redux-form';
 
-export type ActionsType =
-		ReturnType<typeof addPostActionCreator>
-		| ReturnType<typeof sendMessage>
-		| ReturnType<typeof followSuccess>
-		| ReturnType<typeof unfollowSuccess>
-		| ReturnType<typeof setUsers>
-		| ReturnType<typeof setCurrentPage>
-		| ReturnType<typeof setTotalUsersCount>
-		| ReturnType<typeof toggleIsFetching>
-		| ReturnType<typeof setUserProfile>
-		| ReturnType<typeof setAuthUserData>
-		| ReturnType<typeof toggleFollowingProgress>
-		| ReturnType<typeof setStatus>
 
 const rootReducer = combineReducers({
 		profilePage: profileReducer,
